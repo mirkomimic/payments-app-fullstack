@@ -45,7 +45,7 @@ const emailRules = [
           Forgot your password? No problem. Just let us know your email address and we will email you a password reset
           link that will allow you to choose a new one.
         </div>
-        <v-form @submit.prevent="submit" class="vuetifySelect">
+        <v-form @submit.prevent="submit">
           <v-row class="pa-4 mt-3">
             <v-col
               class="mx-auto"
@@ -83,10 +83,3 @@ const emailRules = [
     </div>
   </GuestLayout>
 </template>
-
-<style scoped>
-.vuetifySelect:deep() input {
-  background-color: transparent !important;
-  box-shadow: none;
-}
-</style>

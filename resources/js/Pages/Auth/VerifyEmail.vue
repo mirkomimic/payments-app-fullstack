@@ -33,7 +33,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
           A new verification link has been sent to the email address you provided during registration.
         </div>
 
-        <v-form @submit.prevent="submit" class="vuetifySelect">
+        <v-form @submit.prevent="submit">
           <v-row class="pa-4 mt-3">
             <v-col
               class="mx-auto"

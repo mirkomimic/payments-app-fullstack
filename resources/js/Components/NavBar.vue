@@ -4,18 +4,18 @@
     density="compact"
   >
     <v-container>
-      <div class="ml-auto d-flex items-center gap-4">
+      <div class="ml-auto d-flex align-center" style="gap: 16px;">
 
         <div class="d-none d-md-block">
-          <Link href="/">
+          <Link href="/" as="button">
             <img width="70" src=""> ICON
           </Link>
         </div>
 
         <v-spacer></v-spacer>
 
-        <Link v-if="!$page.props.auth.user" :href="route('login')" class="">Log in</Link>
-        <Link v-if="!$page.props.auth.user" :href="route('register')" class="">Register</Link>
+        <Link v-if="!$page.props.auth.user" :href="route('login')" as="button" >Log in</Link>
+        <Link v-if="!$page.props.auth.user" :href="route('register')" as="button" >Register</Link>
         <v-switch
           @click="toggleTheme(theme)"
           density="compact"

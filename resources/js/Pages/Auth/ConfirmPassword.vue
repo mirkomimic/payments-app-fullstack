@@ -42,7 +42,7 @@ const passwordRules = [
           This is a secure area of the application. Please confirm your password before continuing.
         </div>
 
-        <v-form @submit.prevent="submit" class="vuetifySelect">
+        <v-form @submit.prevent="submit">
           <v-row class="pa-4 mt-3">
             <v-col
               class="mx-auto"
@@ -84,10 +84,3 @@ const passwordRules = [
     </div>
   </GuestLayout>
 </template>
-
-<style scoped>
-.vuetifySelect:deep() input {
-  background-color: transparent !important;
-  box-shadow: none;
-}
-</style>

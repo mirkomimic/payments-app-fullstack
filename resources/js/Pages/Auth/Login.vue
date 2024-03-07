@@ -7,7 +7,7 @@
       <v-sheet class="d-flex flex-column justify-center my-auto pa-5" height="500" width="700" rounded>
         <div class="text-h4 text-center text-uppercase mt-5">Login</div>
 
-        <v-form @submit.prevent="submit" class="vuetifySelect">
+        <v-form @submit.prevent="submit">
           <v-row class="pa-4 mt-3">
             <v-col
               class="mx-auto"
@@ -136,10 +136,3 @@ const emailRules = [
 ]
 
 </script>
-
-<style scoped>
-.vuetifySelect:deep() input {
-  background-color: transparent !important;
-  box-shadow: none;
-}
-</style>
