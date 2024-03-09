@@ -33,6 +33,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('simple-charge', SimpleChargeController::class)->only('index', 'store');
-Route::resource('customers', CustomersController::class)->only('index', 'store');
+Route::resource('customers', CustomersController::class)->only('index', 'store', 'update', 'destroy');
 
 require __DIR__ . '/auth.php';

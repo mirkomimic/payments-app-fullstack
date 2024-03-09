@@ -3,7 +3,8 @@ import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { useTheme } from 'vuetify'
 import { toggleBasedOnTheme } from '@/Composables/helpers'; 
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
+import Breadcrumbs from '@/Components/Other/Breadcrumbs.vue';
 
 const theme = useTheme()
 
@@ -27,7 +28,7 @@ const breadcrumbs = [
 ]
 
 const msg = computed(() => {
-  return usePage().props.flash.msg ? true : false
+  return usePage().props.msg ? true : false
 })
 </script>
 
@@ -47,29 +48,22 @@ const msg = computed(() => {
     >
       <div class="text-subtitle-1 pb-2 font-weight-bold">Message</div>
 
-      <p>{{ $page.props.flash.msg }}</p>
+      <p>{{ $page.props.msg }}</p>
 
       <template v-slot:actions>
         <v-btn
           color="black"
           variant="text"
-          @click="$page.props.flash.msg = false"
+          @click="$page.props.msg = false"
         >
           Close
         </v-btn>
       </template>
     </v-snackbar>
 
-    
     <v-container>
 
-      <v-breadcrumbs :items="breadcrumbs" icon="mdi-home" divider="/">
-        <template v-slot:item="{item}">
-          <v-breadcrumbs-item :disabled="item.disabled">
-            <Link :href="route(item.route)" as="button">{{ item.title }}</Link>
-          </v-breadcrumbs-item>
-        </template>
-      </v-breadcrumbs>
+      <Breadcrumbs :breadcrumbs="breadcrumbs"/>
 
       <v-row
         style="height: 150px;"
