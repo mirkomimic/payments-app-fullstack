@@ -17,6 +17,10 @@ const buttons = [
     name: 'Customers',
     route: 'customers.index'
   },
+  {
+    name: 'Payment Methods',
+    route: 'payment-methods.index'
+  },
 ]
 
 const breadcrumbs = [
@@ -68,6 +72,9 @@ const msg = computed(() => {
       <v-row
         style="height: 150px;"
         no-gutters
+        justify="space-between"
+        justify-md="center"
+        align-content="center"
       >
         <v-col
           v-for="button in buttons" :key="button.name"
@@ -81,7 +88,7 @@ const msg = computed(() => {
               :color="toggleBasedOnTheme(theme, 'light-blue-darken-4', 'light-blue-lighten-4')"
               variant="flat"
             >
-              {{ button.name }}
+              <div class="text-wrap">{{ button.name }}</div>
             </v-btn>
           </Link>
         </v-col>

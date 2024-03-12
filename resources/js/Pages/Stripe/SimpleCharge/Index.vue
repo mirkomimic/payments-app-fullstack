@@ -2,8 +2,6 @@
   <Head title="Simple Charge" />
 
   <MainLayout>
-    
-    <Head title="Simple Charge"/>
 
     <v-container>
 
@@ -160,11 +158,3 @@ onMounted(() => {
   });
 })
 </script>
-
-<style scoped>
-.custom-card-element {
-  padding: 15px;
-  border: 1px solid #000000;
-  border-radius: 5px; 
-}
-</style>

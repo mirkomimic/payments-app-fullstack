@@ -1,2 +1,6 @@
-
+.custom-card-element {
+  padding: 15px;
+  border: 1px solid #000000;
+  border-radius: 5px; 
+}
 

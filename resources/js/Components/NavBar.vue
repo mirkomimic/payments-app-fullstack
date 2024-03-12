@@ -6,7 +6,7 @@
     <v-container>
       <div class="ml-auto d-flex align-center" style="gap: 16px;">
 
-        <div class="d-none d-md-block">
+        <div>
           <Link href="/" as="button">
             <img width="70" src=""> ICON
           </Link>
@@ -21,7 +21,7 @@
           density="compact"
           true-icon="mdi-white-balance-sunny"
           false-icon="mdi-weather-night"
-          color="light-blue-lighten-4"
+          color="light-blue-darken-4"
           value="secondary"
           hide-details
         ></v-switch>

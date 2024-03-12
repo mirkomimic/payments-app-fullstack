@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Stripe\CustomersController;
+use App\Http\Controllers\Stripe\PaymentMethodsController;
 use App\Http\Controllers\Stripe\SimpleChargeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('simple-charge', SimpleChargeController::class)->only('index', 'store');
 Route::resource('customers', CustomersController::class)->only('index', 'store', 'update', 'destroy');
+Route::resource('payment-methods', PaymentMethodsController::class)->only('index', 'store', 'update', 'destroy');
 
 require __DIR__ . '/auth.php';
