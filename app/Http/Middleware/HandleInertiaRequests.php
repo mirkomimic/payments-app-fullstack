@@ -36,7 +36,8 @@ class HandleInertiaRequests extends Middleware
       ],
       'stripe_key' => env('STRIPE_KEY'),
       'flash' => [
-        'msg' => fn () => $request->session()->get('msg')
+        'msg' => fn () => $request->session()->get('msg'),
+        'isOpen' => false
       ],
     ];
   }

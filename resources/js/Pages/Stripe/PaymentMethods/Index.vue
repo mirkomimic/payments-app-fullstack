@@ -94,12 +94,18 @@
                     >{{isDefault(paymentMethod) ? 'default' : ''}}
                   </v-chip>
 
-                  <PaymentMethodOptionsMenu :payment-method="paymentMethod" :default-method="props.defaultMethod"/>
+                  <PaymentMethodOptionsMenu
+                    :payment-method="paymentMethod"
+                    :default-method="props.defaultMethod" 
+                  />
                 </div>
                 
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <PaymentMethodInfoTable :payment-method="paymentMethod" :is-default-method="isDefault(paymentMethod)"/>
+                <PaymentMethodInfoTable
+                  :payment-method="paymentMethod"
+                  :is-default-method="isDefault(paymentMethod)" 
+                />
               </v-expansion-panel-text>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -124,8 +130,6 @@ const props = defineProps({
   paymentMethods: { type: Array },
   defaultMethod: { type: Object },
 })
-
-
 
 const msg = computed(() => {
   return usePage().props.flash.msg ? true : false

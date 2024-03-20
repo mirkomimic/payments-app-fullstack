@@ -21,6 +21,14 @@ const buttons = [
     name: 'Payment Methods',
     route: 'payment-methods.index'
   },
+  {
+    name: 'Product Checkout',
+    route: 'checkout.index'
+  },
+  {
+    name: 'Products',
+    route: 'products.index'
+  },
 ]
 
 const breadcrumbs = [
@@ -40,46 +48,41 @@ const msg = computed(() => {
 
   <Head title="Home" />
 
-  <MainLayout>
+  <v-snackbar
+    v-model="msg"
+    location="top right"
+    position="fixed"
+    variant="elevated"
+    color="light-blue-darken-4"
+    vertical
+  >
+    <div class="text-subtitle-1 pb-2 font-weight-bold">Message</div>
 
-    <v-snackbar
-      v-model="msg"
-      location="top right"
-      position="fixed"
-      variant="elevated"
-      color="light-blue-darken-4"
-      vertical
-    >
-      <div class="text-subtitle-1 pb-2 font-weight-bold">Message</div>
+    <p>{{ $page.props.msg }}</p>
 
-      <p>{{ $page.props.msg }}</p>
+    <template v-slot:actions>
+      <v-btn
+        color="black"
+        variant="text"
+        @click="$page.props.msg = false"
+      >
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 
-      <template v-slot:actions>
-        <v-btn
-          color="black"
-          variant="text"
-          @click="$page.props.msg = false"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
-
+  <MainLayout>  
     <v-container>
 
       <Breadcrumbs :breadcrumbs="breadcrumbs"/>
 
       <v-row
-        style="height: 150px;"
-        no-gutters
-        justify="space-between"
-        justify-md="center"
-        align-content="center"
+        justify="start"
       >
         <v-col
-          v-for="button in buttons" :key="button.name"
-          cols="3"
-          class="ma-3"
+          v-for="(button, index) in buttons" :key="index"
+          cols="4"
+          class="pa-5"
         >
           <Link :href="route(button.route)">
             <v-btn

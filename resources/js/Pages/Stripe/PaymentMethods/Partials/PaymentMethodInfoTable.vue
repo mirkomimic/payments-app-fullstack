@@ -45,35 +45,6 @@
         <td>{{ props.paymentMethod.card.country }}</td>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <td>
-          <v-btn
-            @click="form.delete(route('payment-methods.destroy', form.paymentMethodId))"
-            :loading="form.processing"
-            :disabled="form.processing"
-            color="error"
-            variant="outlined"
-            density="comfortable"
-            class="mt-3"
-            >Remove Card
-          </v-btn>
-        </td>
-        <td>
-          <v-btn
-            v-if="!isDefaultMethod"
-            @click="form.put(route('payment-methods.update', form.paymentMethodId))"
-            :loading="form.processing"
-            :disabled="form.processing"
-            color="primary"
-            variant="outlined"
-            density="comfortable"
-            class="mt-3"
-            >Set as default
-          </v-btn>
-        </td>
-      </tr>
-    </tfoot>
   </v-table>
 </template>
 
