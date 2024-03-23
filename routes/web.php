@@ -5,6 +5,7 @@ use App\Http\Controllers\Stripe\Checkout\ProductCheckoutController;
 use App\Http\Controllers\Stripe\CustomersController;
 use App\Http\Controllers\Stripe\PaymentMethodsController;
 use App\Http\Controllers\Stripe\SimpleChargeController;
+use App\Http\Controllers\StripeApi\PricesController;
 use App\Http\Controllers\StripeApi\ProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -40,5 +41,6 @@ Route::resource('customers', CustomersController::class)->only('index', 'store',
 Route::resource('payment-methods', PaymentMethodsController::class)->only('index', 'store', 'update', 'destroy');
 Route::resource('checkout', ProductCheckoutController::class)->only('index', 'store', 'update', 'destroy');
 Route::resource('products', ProductController::class)->only('index', 'show', 'store', 'update', 'destroy');
+Route::resource('prices', PricesController::class)->only('store', 'update', 'destroy');
 
 require __DIR__ . '/auth.php';

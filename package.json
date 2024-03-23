@@ -17,6 +17,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "vue-currency-input": "^3.1.0",
         "vuetify": "^3.5.7"
     }
 }
