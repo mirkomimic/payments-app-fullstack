@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
         'msg' => fn () => $request->session()->get('msg'),
         'isOpen' => false
       ],
+      'cart' => session('cart', []),
     ];
   }
 }

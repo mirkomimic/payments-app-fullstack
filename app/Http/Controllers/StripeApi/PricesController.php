@@ -11,11 +11,18 @@ class PricesController extends StripeApiController
   public function store(PriceRequest $request): RedirectResponse
   {
 
-    $this->stripe->prices->create([
+    $price = $this->stripe->prices->create([
       'product' => $request->product_id,
       'unit_amount' => $request->price,
       'currency' => 'eur',
     ]);
+
+    $this->stripe->products->update(
+      $request->product_id,
+      [
+        'default_price' => $price->id,
+      ]
+    );
 
     return redirect()->back()->with('msg', 'Price created');
   }

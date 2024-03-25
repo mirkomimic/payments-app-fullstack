@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Stripe\Checkout\ProductCheckoutController;
 use App\Http\Controllers\Stripe\CustomersController;
@@ -42,5 +43,10 @@ Route::resource('payment-methods', PaymentMethodsController::class)->only('index
 Route::resource('checkout', ProductCheckoutController::class)->only('index', 'store', 'update', 'destroy');
 Route::resource('products', ProductController::class)->only('index', 'show', 'store', 'update', 'destroy');
 Route::resource('prices', PricesController::class)->only('store', 'update', 'destroy');
+
+// Route::resource('cart', CartController::class)->only('store', 'update', 'destroy');
+Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+Route::post('cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('cart', [CartController::class, 'destroy'])->name('cart.destroy');
 
 require __DIR__ . '/auth.php';

@@ -22,7 +22,7 @@
     </v-bottom-navigation>
 
     <v-footer style="z-index: 20;" v-if="display.mdAndUp">
-      <!-- <MainFooter/> -->
+      <Footer/>
     </v-footer>
 
   </v-app>
@@ -31,6 +31,7 @@
 <script setup>
 // import BottomNav from '@/Components/BottomNav.vue';
 // import MainFooter from '@/Components/MainFooter.vue';
+import Footer from '@/Components/Footer.vue';
 import NavBar from '@/Components/NavBar.vue';
 import { ref } from 'vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';

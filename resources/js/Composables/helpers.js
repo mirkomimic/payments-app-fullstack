@@ -42,6 +42,10 @@ const isDefaultPrice = (price, product) => {
   return price.id == product.default_price ? true : false
 }
 
+const findDefaultPriceByProd = (prices, product) => {
+  return prices.data.find(price => price.id == product.default_price)
+}
+
 const rules = {
   required: value => {
     if (value) return true
@@ -61,4 +65,4 @@ const rules = {
   }
 }
 
-export {toggleBasedOnTheme, toggleTheme, rules, formatInputPrice, formatPrice,  removeDotsAndCommas, getPriceByProdId, getDefaultPriceByProd, isDefaultPrice}
+export {toggleBasedOnTheme, toggleTheme, rules, formatInputPrice, formatPrice,  removeDotsAndCommas, getPriceByProdId, getDefaultPriceByProd, isDefaultPrice, findDefaultPriceByProd}

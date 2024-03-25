@@ -45,17 +45,20 @@
             <td class="d-flex align-center ga-3"> 
               <div 
                 v-for="(price, index) in props.prices.data" :key="index"
-                :class="{'text-red text-decoration-line-through order-last': !isDefaultPrice(price, props.product)}" 
+                :class="{
+                  'text-red text-decoration-line-through': !isDefaultPrice(price, props.product),
+                  'order-first': isDefaultPrice(price, props.product),
+                  'd-none': !price.active
+                }" 
               >
-                <div v-if="price.active">
-                  &euro; {{ formatPrice((price.unit_amount_decimal / 100)) }}
-                </div>
+                &euro; {{ formatPrice((price.unit_amount_decimal / 100)) }}
               </div>
             </td>
           </tr>
         </tbody>
       </v-table>
 
+      <AddRemoveFromCart :price="findDefaultPriceByProd(props.prices, props.product)" class="mt-3"/>
     </v-container>
   </MainLayout>
 </template>
@@ -65,14 +68,18 @@ import CreateProductPriceDialog from '@/Components/Dialogs/CreateProductPriceDia
 import EditProductPricesDialog from '@/Components/Dialogs/EditProductPricesDialog.vue';
 import Breadcrumbs from '@/Components/Other/Breadcrumbs.vue';
 import Snackbar from '@/Components/Other/Snackbar.vue';
-import { formatPrice, getDefaultPriceByProd, isDefaultPrice } from '@/Composables/helpers';
+import { formatPrice, isDefaultPrice, findDefaultPriceByProd } from '@/Composables/helpers';
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3'
+import AddRemoveFromCart from './Partials/AddRemoveFromCart.vue';
+import { provide } from 'vue';
 
 const props = defineProps({
   product: { type: Object, required: true },
   prices: {type: Object}
 })
+
+provide('product', props.product)
 
 const breadcrumbs = [
   {

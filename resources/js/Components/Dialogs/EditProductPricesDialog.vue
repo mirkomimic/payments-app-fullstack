@@ -42,7 +42,7 @@
             <v-list-item
               :value="(props.value)"
               v-bind="props"
-              v-if="item.raw.active"
+              :class="{'text-red': !item.raw.active}"
             >
               <template v-slot:title>
                 &euro; {{ formatPrice(props.title / 100) }}
@@ -113,6 +113,7 @@ const form = useForm({
 
 
 const close = () => {
+  form.reset()
   dialog.value = false
 }
 

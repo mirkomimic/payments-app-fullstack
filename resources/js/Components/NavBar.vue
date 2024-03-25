@@ -16,6 +16,9 @@
 
         <Link v-if="!$page.props.auth.user" :href="route('login')" as="button" >Log in</Link>
         <Link v-if="!$page.props.auth.user" :href="route('register')" as="button" >Register</Link>
+
+        <CartDialog />
+        
         <v-switch
           @click="toggleTheme(theme)"
           density="compact"
@@ -36,6 +39,7 @@ import { Link } from '@inertiajs/vue3';
 import { toggleTheme } from '@/Composables/helpers'
 import { useTheme } from 'vuetify'
 import NavBarUserMenu from './Menus/NavBarUserMenu.vue';
+import CartDialog from './Dialogs/CartDialog.vue';
 
 const theme = useTheme()
 
