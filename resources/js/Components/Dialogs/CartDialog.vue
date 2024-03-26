@@ -81,6 +81,7 @@
           color="error"
           text="Clear cart"
           variant="tonal"
+          size="small"
         ></v-btn>
 
         <v-spacer></v-spacer>
@@ -89,15 +90,27 @@
           @click="dialog = false"
           text="Close"
           variant="plain"
+          size="small"
         ></v-btn>
 
         <v-btn
+          @click="submit"
           :disabled="!quantity"
           form="form"
           color="primary"
-          text="Save"
+          text="Checkout (hosted)"
           variant="tonal"
-          type="submit"
+          size="small"
+        ></v-btn>
+
+        <v-btn
+          @click="embeddedCheckout"
+          :disabled="!quantity"
+          form="form"
+          color="primary"
+          text="Checkout (embedded)"
+          variant="tonal"
+          size="small"
         ></v-btn>
       </v-card-actions>
     </v-card>
@@ -128,5 +141,31 @@ const grandTotal = computed(() => {
 
 const clear = () => {
   router.delete(route('cart.destroy'));
+}
+
+const submit = () => {
+  let items = [];
+
+  cart.value.forEach(item => {
+    items.push({
+      price: item.price.id,
+      quantity: item.quantity,
+    });
+  })
+
+  router.post(route('checkout.store', {items}))
+}
+
+const embeddedCheckout = () => {
+  let items = [];
+
+  cart.value.forEach(item => {
+    items.push({
+      price: item.price.id,
+      quantity: item.quantity,
+    });
+  })
+
+  router.get(route('embedded-checkout.index', {items}))
 }
 </script>

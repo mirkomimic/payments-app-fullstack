@@ -6,6 +6,7 @@ use App\Http\Controllers\Stripe\Checkout\ProductCheckoutController;
 use App\Http\Controllers\Stripe\CustomersController;
 use App\Http\Controllers\Stripe\PaymentMethodsController;
 use App\Http\Controllers\Stripe\SimpleChargeController;
+use App\Http\Controllers\StripeApi\CheckoutController;
 use App\Http\Controllers\StripeApi\PricesController;
 use App\Http\Controllers\StripeApi\ProductController;
 use Illuminate\Foundation\Application;
@@ -40,7 +41,8 @@ Route::middleware('auth')->group(function () {
 Route::resource('simple-charge', SimpleChargeController::class)->only('index', 'store');
 Route::resource('customers', CustomersController::class)->only('index', 'store', 'update', 'destroy');
 Route::resource('payment-methods', PaymentMethodsController::class)->only('index', 'store', 'update', 'destroy');
-Route::resource('checkout', ProductCheckoutController::class)->only('index', 'store', 'update', 'destroy');
+Route::resource('checkout', ProductCheckoutController::class)->only('store');
+Route::resource('embedded-checkout', CheckoutController::class)->only('index', 'store');
 Route::resource('products', ProductController::class)->only('index', 'show', 'store', 'update', 'destroy');
 Route::resource('prices', PricesController::class)->only('store', 'update', 'destroy');
 

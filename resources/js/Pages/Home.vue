@@ -22,10 +22,6 @@ const buttons = [
     route: 'payment-methods.index'
   },
   {
-    name: 'Product Checkout',
-    route: 'checkout.index'
-  },
-  {
     name: 'Products',
     route: 'products.index'
   },
