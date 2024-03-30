@@ -23,7 +23,6 @@
       title="Edit product prices"
     >
       <v-card-text class="mt-5">
-
         <v-select
           v-model="form.price_id"
           label="Select default price"
@@ -35,7 +34,7 @@
           density="comfortable"
         >
           <template v-slot:selection="{item}">
-            &euro; {{ formatPrice(item.title / 100) }}
+            {{ formatPriceAsString(item.raw) }}
           </template>
 
           <template v-slot:item="{props, item}">
@@ -45,7 +44,7 @@
               :class="{'text-red': !item.raw.active}"
             >
               <template v-slot:title>
-                &euro; {{ formatPrice(props.title / 100) }}
+                {{ formatPriceAsString(item.raw) }}
               </template>
             </v-list-item>
           </template>
@@ -91,9 +90,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useForm, usePage } from '@inertiajs/vue3'
-import { formatPrice, getDefaultPriceByProd } from '@/Composables/helpers';
+import { findDefaultPriceByProd, formatPriceAsString } from '@/Composables/helpers';
+import { computed } from 'vue';
 
 const dialog = ref(false)
 
@@ -102,39 +102,37 @@ const props = defineProps({
   prices: {type: Object}
 })
 
-const isChanged = computed(() => {
-  return getDefaultPriceByProd(props.prices, props.product)[0] == form.price_id ? true : false
+const defaultPrice = computed(() => {
+  return findDefaultPriceByProd(props.prices, props.product)
 })
 
 const form = useForm({
-  price_id: getDefaultPriceByProd(props.prices, props.product)[0].id,
+  price_id: defaultPrice.value.id,
   product_id: props.product.id
 })
 
-
 const close = () => {
-  form.reset()
   dialog.value = false
 }
 
 const submit = () => {
 
   form.patch(route('prices.update', form.price_id), {
-    onSuccess: () => usePage().props.flash.isOpen = true,
+    onSuccess: () => {
+      usePage().props.flash.isOpen = true
+      close();
+    },
   });
-
-  close();
-
 }
 
 const deactivatePrice = () => {
   if (form.price_id == props.product.default_price) return false
 
   form.delete(route('prices.destroy', form.price_id), {
-    onSuccess: () => usePage().props.flash.isOpen = true,
+    onSuccess: () => {
+      usePage().props.flash.isOpen = true
+      close();
+    },
   });
-
-  close();
-
 }
 </script>

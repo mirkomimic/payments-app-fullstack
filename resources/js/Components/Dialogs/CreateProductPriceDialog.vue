@@ -24,10 +24,51 @@
     >
       <v-card-text class="mt-5">
         <v-form id="form">
-          <CurrencyInput
-            :currency="'EUR'"
-            @change="(value) => form.price = value" 
-          />
+          <v-row>
+            <v-col
+              cols="12"
+              class="pa-0"
+            >
+              <CurrencyInput
+                :currency="'EUR'"
+                @change="(value) => form.price = value"
+              />
+            </v-col>
+
+            <v-col
+              cols="6"
+              class="pa-0"
+            >
+              <v-checkbox
+                v-model="form.recurring"
+                color="primary"
+                label="Recurring"
+                hide-details
+                :error-messages="form.errors.recurring"
+              ></v-checkbox>
+            </v-col>
+
+            <v-col
+              cols="6"
+              class="pa-0"
+              align-self="center"
+            >
+              <v-fade-transition>
+                <v-select
+                  v-if="form.recurring"
+                  v-model="form.interval"
+                  :items="['day', 'week', 'month', 'year']"
+                  color="primary"
+                  variant="outlined"
+                  label="Choose Interval"
+                  hide-details
+                  :error-messages="form.errors.interval"
+                  density="compact"
+                ></v-select>
+              </v-fade-transition>
+            </v-col>
+          </v-row>
+
         </v-form>
       </v-card-text>
 
@@ -71,6 +112,8 @@ const props = defineProps({
 const form = useForm({
   product_id: props.product.id,
   price: null, 
+  recurring: false,
+  interval: 'month',
 })
 
 const close = () => {

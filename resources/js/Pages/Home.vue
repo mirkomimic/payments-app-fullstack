@@ -25,6 +25,10 @@ const buttons = [
     name: 'Products',
     route: 'products.index'
   },
+  {
+    name: 'Subscriptions',
+    route: 'subscriptions.index'
+  },
 ]
 
 const breadcrumbs = [

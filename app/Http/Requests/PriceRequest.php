@@ -23,7 +23,9 @@ class PriceRequest extends FormRequest
   {
     return [
       'product_id' => 'required|string',
-      'price' => 'required|numeric'
+      'price' => 'required|numeric',
+      'recurring' => 'nullable|boolean',
+      'interval' => 'nullable|string'
     ];
   }
 }

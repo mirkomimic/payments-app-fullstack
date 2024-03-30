@@ -37,14 +37,29 @@ class ProductController extends StripeApiController
   {
     $images = StoreProductImages::store($request);
 
-    $this->stripe->products->create([
-      'name' => $request->name,
-      'default_price_data' => [
-        'currency' => 'EUR',
-        'unit_amount' => $request->price
-      ],
-      'images' => $images
-    ]);
+    if ($request->recurring) {
+      $this->stripe->products->create([
+        'name' => $request->name,
+        'default_price_data' => [
+          'currency' => 'EUR',
+          'unit_amount' => $request->price,
+          'recurring' => [
+            'interval' => $request->interval
+          ]
+        ],
+        'images' => $images
+      ]);
+    } else {
+      $this->stripe->products->create([
+        'name' => $request->name,
+        'default_price_data' => [
+          'currency' => 'EUR',
+          'unit_amount' => $request->price
+        ],
+        'images' => $images
+      ]);
+    }
+
 
     return redirect()->back()->with('msg', 'Product created');
   }

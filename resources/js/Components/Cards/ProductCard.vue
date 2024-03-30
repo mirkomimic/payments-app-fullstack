@@ -22,7 +22,7 @@
       <v-card-text>
         
         <div v-for="price in prices" :key="price.id">
-          {{ formatPrice(price.unit_amount_decimal / 100) }}
+           {{ formatPriceAsString(price) }}
         </div>
 
         <div>{{ product.description }}</div>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { formatPrice } from '@/Composables/helpers';
+import { formatPrice, formatPriceAsString } from '@/Composables/helpers';
 import DeleteProductDialog from '../Dialogs/DeleteProductDialog.vue';
 import { router } from '@inertiajs/vue3'
 

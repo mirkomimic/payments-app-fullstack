@@ -26,6 +26,12 @@ const formatPrice = (price) => {
   return price.toLocaleString("de-DE", { maximumFractionDigits: 2, minimumFractionDigits: 2 })
 }
 
+const formatPriceAsString = (price) => {
+  let string = price.recurring ? `/ ${price.recurring.interval}` : '';
+  let number = price.unit_amount_decimal / 100
+  return number.toLocaleString("de-DE", { maximumFractionDigits: 2, minimumFractionDigits: 2, currency: 'EUR', style: 'currency' }) + ` ${string}`
+}
+
 const removeDotsAndCommas = (value) => {
   return value.replace(/[^\d,-]/g, '').replace(',', '.')
 }
@@ -44,6 +50,11 @@ const isDefaultPrice = (price, product) => {
 
 const findDefaultPriceByProd = (prices, product) => {
   return prices.data.find(price => price.id == product.default_price)
+}
+
+const isSubscription = (prices, product) => {
+  let priceObject = findDefaultPriceByProd(prices, product)
+  return priceObject.recurring ? true : false
 }
 
 const rules = {
@@ -65,4 +76,4 @@ const rules = {
   }
 }
 
-export {toggleBasedOnTheme, toggleTheme, rules, formatInputPrice, formatPrice,  removeDotsAndCommas, getPriceByProdId, getDefaultPriceByProd, isDefaultPrice, findDefaultPriceByProd}
+export {toggleBasedOnTheme, toggleTheme, rules, formatInputPrice, formatPrice,  removeDotsAndCommas, getPriceByProdId, getDefaultPriceByProd, isDefaultPrice, findDefaultPriceByProd, formatPriceAsString, isSubscription}

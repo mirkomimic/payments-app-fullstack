@@ -24,7 +24,9 @@ class ProductRequest extends FormRequest
     return [
       'name' => 'required|string',
       'price' => 'required|numeric',
-      'images[]' => 'nullable|mimes:png,jpg,jpeg|max:8'
+      'images[]' => 'nullable|mimes:png,jpg,jpeg|max:8',
+      'recurring' => 'nullable|boolean',
+      'interval' => 'nullable|string'
     ];
   }
 }

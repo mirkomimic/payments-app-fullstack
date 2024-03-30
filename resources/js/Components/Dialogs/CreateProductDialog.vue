@@ -58,6 +58,35 @@
             </v-col>
 
             <v-col
+              cols="6"
+            >
+              <v-checkbox
+                v-model="form.recurring"
+                color="primary"
+                label="Recurring"
+                hide-details
+                :error-messages="form.errors.recurring"
+              ></v-checkbox>
+            </v-col>
+
+            <v-col
+              cols="6"
+            >
+              <v-fade-transition>
+                <v-select
+                  v-if="form.recurring"
+                  v-model="form.interval"
+                  :items="['day', 'week', 'month', 'year']"
+                  color="primary"
+                  variant="outlined"
+                  label="Choose Interval"
+                  hide-details
+                  :error-messages="form.errors.interval"
+                ></v-select>
+              </v-fade-transition>
+            </v-col>
+
+            <v-col
               cols="12"
             >
               <v-file-input
@@ -125,7 +154,9 @@ const imgPreview = ref(null)
 const form = useForm({
   name: '',
   price: null,
-  images: null
+  images: null,
+  recurring: false,
+  interval: 'month',
 })
 
 const close = () => {

@@ -30,7 +30,7 @@
         </v-carousel-item>
       </v-carousel>
 
-      <v-table density="compact">
+      <v-table density="compact" class="mb-3">
         <tbody>
           <tr>
             <td>ID</td>
@@ -51,14 +51,23 @@
                   'd-none': !price.active
                 }" 
               >
-                &euro; {{ formatPrice((price.unit_amount_decimal / 100)) }}
+                {{ formatPriceAsString(price) }}
               </div>
             </td>
           </tr>
         </tbody>
       </v-table>
 
-      <AddRemoveFromCart :price="findDefaultPriceByProd(props.prices, props.product)" class="mt-3"/>
+      <AddRemoveFromCart
+        v-if="!isSubscription(props.prices, props.product)"
+        :price="findDefaultPriceByProd(props.prices, props.product)"
+      />
+
+     <CreateSubscriptionDialog
+        v-else
+        :price="findDefaultPriceByProd(props.prices, props.product)" 
+      />
+
     </v-container>
   </MainLayout>
 </template>
@@ -68,11 +77,12 @@ import CreateProductPriceDialog from '@/Components/Dialogs/CreateProductPriceDia
 import EditProductPricesDialog from '@/Components/Dialogs/EditProductPricesDialog.vue';
 import Breadcrumbs from '@/Components/Other/Breadcrumbs.vue';
 import Snackbar from '@/Components/Other/Snackbar.vue';
-import { formatPrice, isDefaultPrice, findDefaultPriceByProd } from '@/Composables/helpers';
+import { isDefaultPrice, findDefaultPriceByProd, formatPriceAsString, isSubscription } from '@/Composables/helpers';
 import MainLayout from '@/Layouts/MainLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3'
 import AddRemoveFromCart from './Partials/AddRemoveFromCart.vue';
 import { provide } from 'vue';
+import CreateSubscriptionDialog from '@/Components/Dialogs/CreateSubscriptionDialog.vue';
 
 const props = defineProps({
   product: { type: Object, required: true },
@@ -86,6 +96,11 @@ const breadcrumbs = [
     title: 'Home',
     disabled: false,
     route: 'home',
+  },
+  {
+    title: 'Products',
+    disabled: false,
+    route: 'products.index',
   },
   {
     title: 'Product',

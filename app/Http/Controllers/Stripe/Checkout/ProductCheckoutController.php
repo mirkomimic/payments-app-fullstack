@@ -18,7 +18,7 @@ class ProductCheckoutController extends Controller
     // Due to Stripe limitations, you may not use the stored default payment method of a customer for single charges. 
     // https://docs.stripe.com/api/checkout/sessions/object
     $session = $request->user()->checkout(
-      $request->products,
+      $request->items,
       [
         'success_url' => route('home') . '?session_id={CHECKOUT_SESSION_ID}',
       ]

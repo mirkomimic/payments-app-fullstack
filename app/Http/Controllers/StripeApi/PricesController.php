@@ -10,12 +10,22 @@ class PricesController extends StripeApiController
 {
   public function store(PriceRequest $request): RedirectResponse
   {
-
-    $price = $this->stripe->prices->create([
-      'product' => $request->product_id,
-      'unit_amount' => $request->price,
-      'currency' => 'eur',
-    ]);
+    if ($request->recurring) {
+      $price = $this->stripe->prices->create([
+        'product' => $request->product_id,
+        'unit_amount' => $request->price,
+        'currency' => 'eur',
+        'recurring' => [
+          'interval' => $request->interval,
+        ]
+      ]);
+    } else {
+      $price = $this->stripe->prices->create([
+        'product' => $request->product_id,
+        'unit_amount' => $request->price,
+        'currency' => 'eur',
+      ]);
+    }
 
     $this->stripe->products->update(
       $request->product_id,
